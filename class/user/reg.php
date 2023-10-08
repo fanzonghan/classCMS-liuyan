@@ -5,7 +5,7 @@ class user_reg {
         return V('reg');
     }
     function post(){
-        if(!isset($_POST['userhash']) || !isset($_POST['passwd']) || !isset($_POST['passwd2'])){
+        if(!isset($_POST['username']) || !isset($_POST['userhash']) || !isset($_POST['passwd']) || !isset($_POST['passwd2'])){
             Return C('admin:ajax','参数错误',1);
         }
         if(config('regcaptcha')){
@@ -33,7 +33,7 @@ class user_reg {
         if($_POST['passwd']!==$_POST['passwd2']) {
             Return C('admin:ajax','密码不一致',1);
         }
-        $user=array('hash'=>$_POST['userhash'],'passwd'=>$_POST['passwd']);
+        $user=array('username'=>$_POST['username'],'hash'=>$_POST['userhash'],'passwd'=>$_POST['passwd']);
         if(config('regcheck')){
             $user['enabled']=0;
         }else{

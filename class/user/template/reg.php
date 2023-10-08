@@ -22,6 +22,10 @@
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form" lay-filter="classcms-reg-form">
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username"></label>
+                <input type="text" name="username" value="" lay-verify="required" placeholder="昵称" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-username"></label>
                 <input type="text" name="userhash" value="" lay-verify="hash" placeholder="账号" class="layui-input">
             </div>
             {this:regFormitem:~()}
