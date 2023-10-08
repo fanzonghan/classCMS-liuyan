@@ -6,11 +6,11 @@ class adminhome {
         );
     }
     function install(){
-        C('this:card:add',array('kindhash'=>'text','cardconfigs'=>array('title'=>'欢迎使用','size'=>'3*1','content'=>'ClassCMS是一款简单、灵活、安全、易于拓展的内容管理系统。<a href="http://classcms.com/demo/" class="layui-btn cms-btn layui-btn-xs" target="_blank">演示</a> <a href="http://classcms.com/class/cms/doc/" class="layui-btn cms-btn layui-btn-xs" target="_blank">文档</a>')));
+        C('this:card:add',array('kindhash'=>'text','cardconfigs'=>array('title'=>'欢迎使用','size'=>'3*1','content'=>'<a href="http://classcms.com/demo/" class="layui-btn cms-btn layui-btn-xs" target="_blank">演示</a> <a href="http://classcms.com/class/cms/doc/" class="layui-btn cms-btn layui-btn-xs" target="_blank">文档</a>')));
     }
     function table(){
         return array(
-                I().'_card'=>array('kindhash'=>'varchar(32)','enabled'=>'int(1)','rolehash'=>'varchar(255)','cardorder'=>'int(11)','cardconfigs'=>'longtext()')
+            I().'_card'=>array('kindhash'=>'varchar(32)','enabled'=>'int(1)','rolehash'=>'varchar(255)','cardorder'=>'int(11)','cardconfigs'=>'longtext()')
         );
     }
     function auth() {

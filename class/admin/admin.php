@@ -484,7 +484,7 @@ class admin {
     }
     function error($msg='error',$ico='&#xe664;') {
         if(is_array($msg)){
-            if(!isset($msg['msg'])){ $msg['msg']='error'; } 
+            if(!isset($msg['msg'])){ $msg['msg']='error'; }
             if(!isset($msg['ico'])){ $msg['ico']='&#xe664;'; }
             Return V('error.php',$msg);
         }else{
@@ -578,7 +578,7 @@ class admin {
                     $val['url']='';
                 }
                 if(empty($val['title'])){
-                    
+
                 }elseif(isset($val['list']) && count($val['list'])>1){
                     $isLayuiForm=true;
                     $html.='<a><div class="layui-inline _classlist"><div class="layui-input-inline"><select lay-filter="breadcrumb_'.$key.'">';
@@ -694,17 +694,16 @@ class admin {
         Return V('login',$array);
     }
     function title() {
-        Return 'ClassCMS-后台管理';
+        Return '留言板-后台管理';
     }
     function navTitle() {
-        Return 'ClassCMS';
+        Return '留言板';
     }
     function loginTitle() {
-        Return 'ClassCMS';
+        Return '留言板';
     }
     function loginCopyright() {
-        //如需去除版权信息,请在应用商店内购买<<自定义版权信息>>应用
-        Return ('<div class="layui-trans layadmin-user-login-footer"><p>© '.date('Y').' <a href="http://classcms.com" target="_blank">ClassCMS.com</a></p></div>');
+        Return ('<div class="layui-trans layadmin-user-login-footer"><p>© '.date('Y').' <a href="http://xiaofan.ink" target="_blank">小范的主页</a></p></div>');
     }
     function logout() {
         if(!C('this:csrfCheck',1)) {

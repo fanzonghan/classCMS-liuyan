@@ -96,16 +96,16 @@ class comment {
         if(!isset($comment['rid'])){
             $comment['rid']=0;
         }
-        if(isset($config['url'])){ 
+        if(isset($config['url'])){
             $comment['url']=C('cms:common:text',$config['url'],300);
-        }else{ 
+        }else{
             $comment['url']='';
         }
         $comment['addtime']=time();
         $comment['edittime']=0;
-        if(isset($config['status'])){ 
+        if(isset($config['status'])){
             $comment['status']=$config['status'];
-        }else{ 
+        }else{
             if($comment['uid']){
                 if(P('manage',I(),$comment['uid'])){
                     $comment['status']=1;
@@ -224,7 +224,7 @@ class comment {
         if(isset($config['replycount'])){
             $comment['replycount']=$config['replycount'];
         }
-        
+
         if(isset($config['sticky'])){
             $comment['sticky']=intval($config['sticky']);
             if($config['sticky']){
@@ -261,7 +261,7 @@ class comment {
                 return E('内容太长了');
             }
         }
-        if(isset($config['status'])){ 
+        if(isset($config['status'])){
             $comment['status']=$config['status'];
             if($thiscomment['status']!=$comment['status']){
                 if($thiscomment['status']==1){
@@ -425,37 +425,37 @@ class comment {
     }
     function table(){
         return array(
-                    I()=>array(
-                        'uid'=>'bigint(10)',
-                        'rid'=>'bigint(10)',//根评论id
-                        'pid'=>'bigint(10)',//回复评论id
-                        'cid'=>'bigint(10)',//栏目id
-                        'aid'=>'bigint(10)',//文章id
-                        'url'=>'varchar(255)',//网址???
-                        'addtime'=>'bigint(10)',
-                        'edittime'=>'bigint(10)',
-                        'status'=>'int(1)',//0:未审核 1:已审核 2:spam
-                        'replycount'=>'int(9)',//回复次数
-                        'likecount'=>'int(9)',//点赞数
-                        'sticky'=>'int(1)',//置顶
-                        'stickytime'=>'bigint(10)',//置顶时间,默认=0
-                        'nick'=>'varchar(50)',//游客名
-                        'mail'=>'varchar(50)',//游客email
-                        'link'=>'varchar(125)',//游客homepage
-                        'title'=>'varchar(125)',//文章标题
-                        'content_orig'=>'text()',//markdown
-                        'content'=>'text()',//html
-                        'ip'=>'varchar(50)',
-                        'city'=>'varchar(20)',
-                        'os'=>'varchar(20)',
-                        'browser'=>'varchar(20)',
-                    ),
-                    I().'_like'=>array(
-                        'uid'=>'bigint(10)',
-                        'pid'=>'bigint(10)',
-                        'addtime'=>'bigint(10)',
-                        'ip'=>'varchar(50)',
-                    )
+            I()=>array(
+                'uid'=>'bigint(10)',
+                'rid'=>'bigint(10)',//根评论id
+                'pid'=>'bigint(10)',//回复评论id
+                'cid'=>'bigint(10)',//栏目id
+                'aid'=>'bigint(10)',//文章id
+                'url'=>'varchar(255)',//网址???
+                'addtime'=>'bigint(10)',
+                'edittime'=>'bigint(10)',
+                'status'=>'int(1)',//0:未审核 1:已审核 2:spam
+                'replycount'=>'int(9)',//回复次数
+                'likecount'=>'int(9)',//点赞数
+                'sticky'=>'int(1)',//置顶
+                'stickytime'=>'bigint(10)',//置顶时间,默认=0
+                'nick'=>'varchar(50)',//游客名
+                'mail'=>'varchar(50)',//游客email
+                'link'=>'varchar(125)',//游客homepage
+                'title'=>'varchar(125)',//文章标题
+                'content_orig'=>'text()',//markdown
+                'content'=>'text()',//html
+                'ip'=>'varchar(50)',
+                'city'=>'varchar(20)',
+                'os'=>'varchar(20)',
+                'browser'=>'varchar(20)',
+            ),
+            I().'_like'=>array(
+                'uid'=>'bigint(10)',
+                'pid'=>'bigint(10)',
+                'addtime'=>'bigint(10)',
+                'ip'=>'varchar(50)',
+            )
         );
     }
     function config() {
@@ -596,16 +596,17 @@ class comment {
         if(!isset($user['avatar'])){ $user['avatar']=''; }
         if(!isset($user['homepage'])){ $user['homepage']=''; }
         $storage=array('objectId'=>$user['id'],'mail'=>$user['email'],'avatar'=>$user['avatar'],'link'=>$user['homepage'],'nick'=>$user['username'],'display_name'=>$user['username'],'label'=>"");
-        if(substr($storage['avatar'],0,1)=='/' && substr($storage['avatar'],0,2)!='//'){
-            if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=='on'){
-                $storage['avatar']='https://'.C('cms:common:serverName').C('cms:common:serverPort').$storage['avatar'];
-            }else{
-                $storage['avatar']='http://'.C('cms:common:serverName').C('cms:common:serverPort').$storage['avatar'];
-            }
-        }
-        if(!$storage['avatar']){
-            $storage['avatar']=C('this:mail2avatar',$storage['mail']);
-        }
+//        if(substr($storage['avatar'],0,1)=='/' && substr($storage['avatar'],0,2)!='//'){
+//            if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=='on'){
+//                $storage['avatar']='https://'.C('cms:common:serverName').C('cms:common:serverPort').$storage['avatar'];
+//            }else{
+//                $storage['avatar']='http://'.C('cms:common:serverName').C('cms:common:serverPort').$storage['avatar'];
+//            }
+//        }
+//        if(!$storage['avatar']){
+//            $storage['avatar']=C('this:mail2avatar',$storage['mail']);
+//        }
+        $storage['avatar'] = "https://q1.qlogo.cn/g?b=qq&nk=" . $user['qq'] . "&s=640";
         if(P('manage',I(),$user['id'])){
             $storage['type']='administrator';
         }else{
@@ -726,17 +727,18 @@ class comment {
                         }
                     }
                     if(!isset($user['avatar'])){ $user['avatar']=''; }
-                    $return['avatar']=@$user['avatar'];
-                    if(substr($return['avatar'],0,1)=='/' && substr($return['avatar'],0,2)!='//'){
-                        if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=='on'){
-                            $return['avatar']='https://'.C('cms:common:serverName').C('cms:common:serverPort').$return['avatar'];
-                        }else{
-                            $return['avatar']='http://'.C('cms:common:serverName').C('cms:common:serverPort').$return['avatar'];
-                        }
-                    }
-                    if(!$return['avatar']){
-                        $return['avatar']=C('this:mail2avatar',$return['mail']);
-                    }
+//                    $return['avatar']=@$user['avatar'];
+//                    if(substr($return['avatar'],0,1)=='/' && substr($return['avatar'],0,2)!='//'){
+//                        if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=='on'){
+//                            $return['avatar']='https://'.C('cms:common:serverName').C('cms:common:serverPort').$return['avatar'];
+//                        }else{
+//                            $return['avatar']='http://'.C('cms:common:serverName').C('cms:common:serverPort').$return['avatar'];
+//                        }
+//                    }
+//                    if(!$return['avatar']){
+//                        $return['avatar']=C('this:mail2avatar',$return['mail']);
+//                    }
+                    $return['avatar']="https://q1.qlogo.cn/g?b=qq&nk=".@$user['qq']."&s=640";
                     break;
                 }
             }

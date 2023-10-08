@@ -206,7 +206,7 @@ class cms {
     }
     function notFound() {
         @header("HTTP/1.1 404 Not Found");
-        echo('<html><head><title>404 Not Found</title></head><body><center><h1>404 Not Found</h1></center><hr><center><a href="http://classcms.com" style="color:#000;text-decoration:none" target="_blank">ClassCMS</a></center></body></html>');
+        echo('<html><head><title>404 Not Found</title></head><body><center><h1>404 Not Found</h1></center><hr><center></center></body></html>');
         Return true;
     }
     function ob_content($content) {
@@ -1434,7 +1434,7 @@ class cms_database {
                 $this->error('database connect error');
                 $this->connectError=true;
             }
-            
+
         }else{
             $this->error('database error');
             $this->connectError=true;
@@ -1442,7 +1442,7 @@ class cms_database {
     }
     function disconnect(){
         if($this->kind=='mysql') {
-            mysql_close($this->databaselink); 
+            mysql_close($this->databaselink);
         }
         $this->DB = null;
         $this->Stmt = null;
@@ -1461,7 +1461,7 @@ class cms_database {
             Return false;
         }
         if($this->kind=='mysql') {
-            $res = mysql_query($sql,$this->databaselink); 
+            $res = mysql_query($sql,$this->databaselink);
         }else {
             $res = $this->databaselink->query($sql);
         }
@@ -2005,7 +2005,7 @@ class cms_database {
             }
             if($config['page']==$i){
                 $pagesarray[]=array('link'=>$thisurl,'title'=>$i,'class'=>$config['style_active'],'page'=>$i);
-                
+
             }else{
                 $pagesarray[]=array('link'=>$thisurl,'title'=>$i,'class'=>'','page'=>$i);
             }
@@ -2137,7 +2137,7 @@ class cms_database {
         }elseif($this->kind=='mysqlpdo' || $this->kind=='mysql') {
             $this->query("alter table $table drop INDEX $name;");
         }
-        
+
         Return true;
     }
     function getFields($table){
