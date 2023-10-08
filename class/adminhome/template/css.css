@@ -1,0 +1,17 @@
+#cards .layui-card-header{line-height:38px;padding-left:10px}
+#cards .layui-card{border:1px solid #f2f2f2}
+#cards .layui-card-header p.action{right:5px}
+#cards .layui-card-header a.more{font-size: 12px;color:#ccc;padding-right:10px}
+#cards .layui-card-header a.close,#cards .layui-card-header a.move,#cards .layui-card-header a.set{font-size: 12px;color:#ccc;padding-right:5px}
+#cards .layui-card-header .layui-icon-find-fill{cursor:move;font-size:20px}
+#cards .layui-card-header .layui-icon-close,#cards .layui-card-header .layui-icon-set-fill{cursor:pointer;font-size:20px;}
+#cards .cardheight-1{height:74px}
+#cards .cardheight-2{height:229px}
+#cards .cardheight-3{height:384px}
+#cards .cardheight-4{height:539px}
+#cards .layui-card-body h1,#cards .layui-card-body h2,#cards .layui-card-body h3{text-align:center}
+#cards .cardheight-1 h1{font-size:42px;line-height:1.8}
+#cards .cardheight-1 h2{font-size:32px;line-height:2.6}
+#cards .cardheight-1 h3{font-size:22px;line-height:3.8}
+#cards .layui-card-body{overflow:hidden}
+#cards .layui-card-body img{max-width:100%;overflow:hidden}
