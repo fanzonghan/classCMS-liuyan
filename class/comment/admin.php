@@ -47,7 +47,7 @@ class comment_admin {
         }elseif(!config('guestcomment')){
             $config['login']='force';
         }
-        $config['imageUploader']=false;
+        $config['imageUploader']=true;
         if(!config('gif')){
             $config['search']=false;
         }

@@ -20,12 +20,31 @@
     const e = ["nick", "mail", "link"],
         t = t => t.filter(t => e.includes(t)),
         n = e => new Promise((t, n) => {
-            if (e.size > 128e3) return n(new Error("File too large! File size limit 128KB"));
-            const r = new FileReader();
-            r.readAsDataURL(e), r.onload = () => {
-                var _r$result;
-                return t(((_r$result = r.result) === null || _r$result === void 0 ? void 0 : _r$result.toString()) || "");
-            }, r.onerror = n;
+            console.log(e)
+            // if (e.size > 128e3) return n(new Error("File too large! File size limit 128KB"));
+            //如果文件小于128kb 直接base
+            if(e.size <= 128e3){
+                const r = new FileReader();
+                r.readAsDataURL(e), r.onload = () => {
+                    var _r$result;
+                    return t(((_r$result = r.result) === null || _r$result === void 0 ? void 0 : _r$result.toString()) || "");
+                }, r.onerror = n;
+            }else{
+                //文件太大则进行上传
+                var formData = new FormData();
+                formData.append('upload-image', e);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://blog.xiaofan.ink/api/upload/uploads', true);
+                xhr.onreadystatechange = function(response) {
+                    if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText != "") {
+                        var res = JSON.parse(xhr.responseText);
+                         return t(res.data.url);
+                    } else if (xhr.status != 200 && xhr.responseText) {
+                        return n(new Error("上传接口异常"));
+                    }
+                };
+                xhr.send(formData);
+            }
         }),
         r = e => !0 === e ? '<p class="wl-tex">Tex is not available in preview</p>' : '<span class="wl-tex">Tex is not available in preview</span>',
         i = e => {
@@ -5999,14 +6018,6 @@
         Us = {
             class: "wl-actions"
         },
-        Ms = {
-            href: "https://guides.github.com/features/mastering-markdown/",
-            title: "Markdown Guide",
-            "aria-label": "Markdown is supported",
-            class: "wl-action",
-            target: "_blank",
-            rel: "noreferrer"
-        },
         Ns = ["title"],
         Fs = ["title"],
         Ds = ["title"],
@@ -6116,42 +6127,50 @@
         }, null, 40, zs), [[Ei, e.editor]]), Zn(Dr("div", Os, [js, Dr("h4", null, H(e.locale.preview) + ":", 1), Wr(" eslint-disable-next-line vue/no-v-html "), Dr("div", {
             class: "wl-content",
             innerHTML: e.previewText
-        }, null, 8, Ts)], 512), [[Mi, e.showPreview]]), Dr("div", Ps, [Dr("div", Us, [Dr("a", Ms, [Vr(s)]), Zn(Dr("button", {
-            ref: "emojiButtonRef",
-            class: N(["wl-action", {
-                active: e.showEmoji
-            }]),
-            title: e.locale.emoji,
-            onClick: t[7] || (t[7] = t => e.showEmoji = !e.showEmoji)
-        }, [Vr(a)], 10, Ns), [[Mi, e.emoji.tabs.length]]), e.config.search ? (Lr(), jr("button", {
-            key: 0,
-            ref: "gifButtonRef",
-            class: N(["wl-action", {
-                active: e.showGif
-            }]),
-            title: e.locale.gif,
-            onClick: t[8] || (t[8] = t => e.showGif = !e.showGif)
-        }, [Vr(c)], 10, Fs)) : Wr("v-if", !0), Dr("input", {
-            id: "wl-image-upload",
-            ref: "imageUploadRef",
-            class: "upload",
-            type: "file",
-            accept: ".png,.jpg,.jpeg,.webp,.bmp,.gif",
-            onChange: t[9] || (t[9] = function () {
-                return e.onChange && e.onChange(...arguments);
-            })
-        }, null, 544), e.canUploadImage ? (Lr(), jr("label", {
-            key: 1,
-            for: "wl-image-upload",
-            class: "wl-action",
-            title: e.locale.uploadImage
-        }, [Vr(u)], 8, Ds)) : Wr("v-if", !0), Dr("button", {
-            class: N(["wl-action", {
-                active: e.showPreview
-            }]),
-            title: e.locale.preview,
-            onClick: t[10] || (t[10] = t => e.showPreview = !e.showPreview)
-        }, [Vr(p)], 10, Vs),
+        }, null, 8, Ts)], 512), [[Mi, e.showPreview]]), Dr("div", Ps, [Dr("div", Us, [
+            // Dr("button", {
+            //         class: N(["wl-action", {
+            //             active: e.showEmoji,
+            //         }]),
+            //         title: "图片",
+            //     }, [Vr(u)]
+            // ),
+            Zn(Dr("button", {
+                ref: "emojiButtonRef",
+                class: N(["wl-action", {
+                    active: e.showEmoji
+                }]),
+                title: e.locale.emoji,
+                onClick: t[7] || (t[7] = t => e.showEmoji = !e.showEmoji)
+            }, [Vr(a)], 10, Ns), [[Mi, e.emoji.tabs.length]]), e.config.search ? (Lr(), jr("button", {
+                key: 0,
+                ref: "gifButtonRef",
+                class: N(["wl-action", {
+                    active: e.showGif
+                }]),
+                title: e.locale.gif,
+                onClick: t[8] || (t[8] = t => e.showGif = !e.showGif)
+            }, [Vr(c)], 10, Fs)) : Wr("v-if", !0), Dr("input", {
+                id: "wl-image-upload",
+                ref: "imageUploadRef",
+                class: "upload",
+                type: "file",
+                accept: ".png,.jpg,.jpeg,.webp,.bmp,.gif",
+                onChange: t[9] || (t[9] = function () {
+                    return e.onChange && e.onChange(...arguments);
+                })
+            }, null, 544), e.canUploadImage ? (Lr(), jr("label", {
+                key: 1,
+                for: "wl-image-upload",
+                class: "wl-action",
+                title: e.locale.uploadImage
+            }, [Vr(u)], 8, Ds)) : Wr("v-if", !0), Dr("button", {
+                class: N(["wl-action", {
+                    active: e.showPreview
+                }]),
+                title: e.locale.preview,
+                onClick: t[10] || (t[10] = t => e.showPreview = !e.showPreview)
+            }, [Vr(p)], 10, Vs),
 
         ]), Dr("div", Bs, [Dr("div", Hs, [Hr(H(e.wordNumber) + " ", 1), e.config.wordLimit ? (Lr(), jr("span", Ws, [Hr("  /  "), Dr("span", {
             class: N({

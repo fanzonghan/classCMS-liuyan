@@ -510,7 +510,7 @@ class comment {
                 $config['path']=C('cms:common:url');
             }
         }
-        $config['imageUploader']=false;
+        $config['imageUploader']=true;
         if(!config('gif')){
             $config['search']=false;
         }
