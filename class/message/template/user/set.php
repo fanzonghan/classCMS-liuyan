@@ -19,8 +19,8 @@
                         </div>
                         <div class="layui-form-mid">{$config.tips}</div>
                     </div>
-                    {$config.qt}
                 </div>
+                {$config.qt}
                 {/loop}
             </div>
 

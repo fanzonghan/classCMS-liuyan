@@ -20,7 +20,12 @@ class message_chuanxi
             'classhash' => I(),
             'classfunction' => I() . ':sender',
             'userconfig' => array(
-                array('configname' => 'appKey', 'hash' => 'appkey', 'inputhash' => 'text', 'tips' => '<a href="https://cx.qingsonge.com/#" class="layui-btn">前往登录</a> <a style="color: red">获取appKey</a>', 'defaultvalue' => '','qt'=>'<iframe src="https://cx.qingsonge.com/#" width="100%" height="300px" frameborder="0"></iframe>'),
+                array('configname' => 'appKey', 'hash' => 'appkey', 'inputhash' => 'text', 'tips' => '<a href="https://cx.qingsonge.com/#" class="layui-btn">手动登录</a> <a style="color: red">获取appKey</a>', 'defaultvalue' => '','qt'=>'<fieldset class="layui-elem-field">
+  <legend>登录</legend>
+  <div class="layui-field-box">
+    <iframe id="cxLogin" src="https://cx.qingsonge.com/#" width="100%" height="300px" frameborder="0"></iframe>
+  </div>
+</fieldset>'),
             )
         );
         return $return;
