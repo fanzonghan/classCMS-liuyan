@@ -13,7 +13,7 @@ class message_chuanxi {
             'classhash'=>I(),
             'classfunction'=>I().':sender',
             'userconfig'=>array(
-                                array('configname'=>'appKey','hash'=>'appkey','inputhash'=>'text','tips'=>'前往 https://cx.qingsonge.com/# 登入后获取appKey','defaultvalue'=>'')
+                                array('configname'=>'appKey','hash'=>'appkey','inputhash'=>'text','tips'=>'<a href="https://cx.qingsonge.com/#" class="layui-btn">前往登录</a> <a style="color: red">获取appKey</a><br><iframe src="https://cx.qingsonge.com/#" width="600px" height="500px"></iframe>','defaultvalue'=>''),
             )
         );
         return $return;
